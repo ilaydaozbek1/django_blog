@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Post content-->
+        <article>
+            <!-- Post header-->
+            <header class="mb-4">
+                <!-- Post title-->
+                <h3 class="fw-bolder mb-1">{{article.title}}</h3>
+                <!-- Post meta content-->
+                <div class="text-muted fst-italic mb-2">syn. {{article.author.username}}, {{article.created_date}} </div>
+                <hr>
+                <!-- Post categories-->
+            </header>
+            <!-- Preview image figure-->
+            {% if articles.article_image %}
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="" >
+            {% endif %}
+            <!-- Post content-->
+            <section class="mb-5">
+                {{article.content|safe}}
+            </section>
+        </article>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+        <h2>Makaleler</h2>
+        <hr>
+    </div>
+    </div>
+</div>
+
+{% if articles %}
+
+{% for article in articles %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title without link -->
+                    <h3 class="fw-bolder mb-1"> <a href="/articles/article/{{article.id}}">{{article.title}}</a></h3>
+
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">syn. {{article.author.username}} tarafından yayınlandı, {{article.created_date}} </div>
+                    <!-- Post categories-->
+                </header>
+                <!-- Preview image figure-->
+                {% if article.article_image %}
+                    <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+                {% endif %}
+                <!-- Brief Post content-->
+                <section class="mb-3">
+                    {{article.content|truncatewords:30|safe}}
+                </section>
+                <a style = "float:right;" href="/articles/article/{{article.id}}" class ="btn btn-primary" >Devamını Oku</a>
+            </article>
+        </div>
+    </div>
+</div>
+<hr style="width: 50%; margin: 30px auto; border: 3px solid #808080;" class="my-4"> <!-- thicker and more spaced horizontal line between articles with gray color -->
+{% endfor %}
+
+{% else %}
+<div class="alert alert-danger">
+    Bu blokta herhangi bir makale bulunmuyor.
+</div>
+{% endif %}
+{% endblock content %}
